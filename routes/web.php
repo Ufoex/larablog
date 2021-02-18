@@ -19,7 +19,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/test', function () {
-    return 'te amo ';
+    return 'test ';
 })->name('test');
 
 Route::get('home/{nombre?}/{apellido?}', function ($nombre = 'Uriel', $apellido = 'Ulloa'){
