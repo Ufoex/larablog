@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostPost;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -30,12 +33,23 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StorePostPost $request)
     {
-        return 'Datos guardados: '.$request->input('title');
+//        $request->validate([
+//            'title' => 'required|min:5|max:500',
+////            'url_clean' => 'required|min:5|max:500',
+//            'content' => 'required|min:5',
+//        ]);
+
+
+        echo 'Datos guardados: '.$request->title;
+
+        Post::create($request->validated());
+
+        return back()->with('status','Post creado con exito');
     }
 
     /**
@@ -63,7 +77,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
